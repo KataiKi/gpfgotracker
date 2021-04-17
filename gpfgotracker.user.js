@@ -8,41 +8,39 @@
 // @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js 
 // ==/UserScript==
 
-//console.log( await GM.getValue("curstep",1)  );
-
 var path = window.location.pathname;
 
 var curstep = 1;
 var curcount = 0;
 
-var stepCounter;
-var counter;
+var stepCounterElement;
+var counterElement;
 
 
 function jumpTo( step ) {
   $(window).scrollTop(
     $("span").filter(function() {
-			return $(this).html() === "Step " + step;
-		}).offset().top);
+			return $(this).html() === ""+step;
+		}).offset().top - 100);
 }
 
-async function step(v) {
-	curstep = Math.max(1, curstep+v);
-  stepCounter.innerHTML = "Step: " + curstep;
+async function setStep(v) {
+  curstep = v;
+  stepCounterElement.innerHTML = "Step: " + curstep;
   await GM.setValue(path + "curstep",curstep)
   jumpTo(curstep);
 }
 
 async function reset() {
   curstep = 1;
-  stepCounter.innerHTML = "Step: " + curstep;
+  stepCounterElement.innerHTML = "Step: " + curstep;
   await GM.setValue(path + "curstep",curstep)
   jumpTo(curstep);
 }
 
 async function setCounter(v) {
   curcount = v;
-  counter.innerHTML = v;
+  counterElement.innerHTML = v;
   await GM.setValue(path + "curcounter",v);
 }
 
@@ -61,48 +59,47 @@ async function load() {
     z-index:100;`
   );
   
-  var buttonUp = document.createElement('button');
-  buttonUp.innerHTML="▲";
-  buttonUp.onclick = function(){ step(-1); document.activeElement.blur() };
-  buttonUp.setAttribute('style',
+  var stepButtonUp = document.createElement('button');
+  stepButtonUp.innerHTML="▲";
+  stepButtonUp.onclick = function(){ setStep(curstep-1); document.activeElement.blur() };
+  stepButtonUp.setAttribute('style',
     `margin: 0 0 5px 0;
 		padding: 5px;`
   );
   
-  var buttonDown = document.createElement('button');
-  buttonDown.innerHTML="▼";
-  buttonDown.onclick = function(){ step(1); document.activeElement.blur() };
-  buttonDown.setAttribute('style',
+  var stepButtonDown = document.createElement('button');
+  stepButtonDown.innerHTML="▼";
+  stepButtonDown.onclick = function(){ setStep(curstep+1); document.activeElement.blur() };
+  stepButtonDown.setAttribute('style',
     `margin: 0 0 5px 0;
 		padding: 5px;`
   );
       
-  stepCounter = document.createElement('button');
-  stepCounter.innerHTML = "Step: " + curstep;
-  stepCounter.setAttribute('style',
+  stepCounterElement = document.createElement('button');
+  stepCounterElement.innerHTML = "Step: " + curstep;
+  stepCounterElement.setAttribute('style',
     `padding: 5px;
 		cursor: pointer;
 		margin: 0 0 5px 0;
 		font-weight: normal !important;`
   );
-  stepCounter.onclick = function(){ jumpTo(curstep), document.activeElement.blur() };
+  stepCounterElement.onclick = function(){ jumpTo(curstep), document.activeElement.blur() };
   
-  
-  wrapper.appendChild(buttonUp);
-  wrapper.appendChild(stepCounter);
-  wrapper.appendChild(buttonDown);
-  
+  wrapper.appendChild(stepButtonUp);
+  wrapper.appendChild(stepCounterElement);
+  wrapper.appendChild(stepButtonDown);
   
   document.body.appendChild(wrapper);
-  
   jumpTo(curstep);
+  
+  
   
   var countWrapper = document.createElement('div');
   countWrapper.setAttribute('style', `text-align: right;`);
   
-  counter = document.createElement('button');
-  counter.innerHTML = curcount;
-  counter.setAttribute('style',
+  counterElement = document.createElement('button');
+  counterElement.innerHTML = curcount;
+  counterElement.setAttribute('style',
     `padding: 5px;
 		display: inline-block;
 		cursor: pointer;
@@ -110,23 +107,23 @@ async function load() {
 		font-weight: normal !important;
 		width: 30px;`              
   );
-  counter.onclick = function(){ setCounter(curcount+1); document.activeElement.blur()}
+  counterElement.onclick = function(){ setCounter(curcount+1); document.activeElement.blur()}
   
   
-  var buttonReset = document.createElement('button');
-  buttonReset.innerHTML = "⟲";
-  buttonReset.setAttribute('style',
+  var countResetButton = document.createElement('button');
+  countResetButton.innerHTML = "⟲";
+  countResetButton.setAttribute('style',
     `padding: 5px;
 		display: inline-block;
 		cursor: pointer;
 		margin: 0;
 		width: auto`
   );
-  buttonReset.onclick = function(){ setCounter(0); document.activeElement.blur()}
+  countResetButton.onclick = function(){ setCounter(0); document.activeElement.blur()}
   
   
-  countWrapper.appendChild(counter);
-  countWrapper.appendChild(buttonReset);
+  countWrapper.appendChild(counterElement);
+  countWrapper.appendChild(countResetButton);
   
   wrapper.appendChild(countWrapper);
 }
