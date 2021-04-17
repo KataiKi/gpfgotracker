@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name     Gamepress Tracker (FGO)
 // @description Keep track of Fate/Grand ORder Walkthrough progress on GamePress
-// @version  1
+// @version  1.1
 // @grant    GM.getValue
 // @grant    GM.setValue
 // @author   Katai
 // @include  https://gamepress.gg/grandorder*walkthrough*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+// @updateURL https://github.com/KataiKi/gpfgotracker/raw/main/gpfgotracker.user.js
 // ==/UserScript==
 
 /*jshint esversion: 9 */
