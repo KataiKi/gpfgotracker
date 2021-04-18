@@ -14,7 +14,7 @@ This script requires your browser to have a Userscript Extension plugin.
 
 After installing the Userscript Extension, click the link below to install the script:
 
-[INSTALL FPFGOTRACKER](https://github.com/KataiKi/gpfgotracker/raw/main/gpfgotracker.user.js)
+[INSTALL GPFGOTRACKER](https://github.com/KataiKi/gpfgotracker/raw/main/gpfgotracker.user.js)
 
 ## Usage
 
