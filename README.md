@@ -14,4 +14,14 @@ This script requires your browser to have a Userscript Extension plugin.
 
 After installing the Userscript Extension, click the link below to install the script:
 
-[CLICK HERE TO INSTALL FPFGOTRACKER](https://github.com/KataiKi/gpfgotracker/raw/main/gpfgotracker.user.js)
+INSTALL FPFGOTRACKER](https://github.com/KataiKi/gpfgotracker/raw/main/gpfgotracker.user.js)
+
+## Usage
+
+The widget should appear on any GamePress walkthrough for Fate/Grand Order.  It should look like this.
+
+![FGO Tracker Widget](https://github.com/KataiKi/gpfgotracker/raw/main/fgotracker.png)
+
+Clicking the arrows will progress you through the walkthrough.  You can also use your scroll wheel on the step counter to increment/decrement your progress.
+
+There is also a counter at the bottom for keeping track of current number of runs.  Click on the number to increment the value, or click on the reset button to return it zero.
