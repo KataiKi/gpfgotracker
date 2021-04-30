@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name     Gamepress Tracker (FGO)
 // @description Keep track of Fate/Grand ORder Walkthrough progress on GamePress
-// @version  1.1
+// @version  1.2
 // @grant    GM.getValue
 // @grant    GM.setValue
 // @author   Katai
@@ -24,8 +24,8 @@ var counterElement;
 function jumpTo( step ) {
   $(window).scrollTop(
     $("span").filter(function() {
-      return $(this).html() === ""+step;
-    }).offset().top - 100);
+      return $(this).html().startsWith(""+step);
+    }).parent().offset().top - 35 - 42);
 }
 
 async function setStep(v) {
