@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name     Gamepress Tracker (FGO)
 // @description Keep track of Fate/Grand ORder Walkthrough progress on GamePress
-// @version  1.2
+// @version  1.3
 // @grant    GM.getValue
 // @grant    GM.setValue
 // @author   Katai
@@ -14,7 +14,7 @@
 
 var path = window.location.pathname;
 
-var curstep = 1;
+var curstep = 0;
 var curcount = 0;
 
 var stepCounterElement;
@@ -22,13 +22,28 @@ var counterElement;
 
 
 function jumpTo( step ) {
+  
+  if(step <= 0){
+    return;
+  }
+  
+  
   $(window).scrollTop(
     $("span").filter(function() {
-      return $(this).html().startsWith(""+step);
-    }).parent().offset().top - 35 - 42);
+      return $(this).html().startsWith(""+step) && $(this).parent().hasClass("walkcol1");
+    }).parent().offset().top);
+}
+
+function jumpToElement( element, offset ) {
+  console.log(element);
+  $(window).scrollTop(element.offset().top + offset);
 }
 
 async function setStep(v) {
+  
+  if(v < 0)
+    return;
+  
   curstep = v;
   stepCounterElement.innerHTML = "Step: " + curstep;
   await GM.setValue(path + "curstep",curstep);
@@ -36,6 +51,7 @@ async function setStep(v) {
 }
 
 async function setCounter(v) {
+  
   curcount = v;
   counterElement.innerHTML = v;
   await GM.setValue(path + "curcounter",v);
@@ -46,6 +62,10 @@ async function load() {
 
   curstep = (await GM.getValue(path + "curstep",1));
   curcount = (await GM.getValue(path + "curcounter",0));
+  
+  steplist = $("span").filter(function() {return $(this).html().match(/^\d/)});
+  
+  
 
   var wrapper = document.createElement('div');
   wrapper.setAttribute('style',
