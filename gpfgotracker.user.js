@@ -6,6 +6,7 @@
 // @grant    GM.setValue
 // @author   Katai
 // @include  https://gamepress.gg/grandorder*walkthrough*
+// @include  https://fgo.gamepress.gg/*walkthrough*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @updateURL https://github.com/KataiKi/gpfgotracker/raw/main/gpfgotracker.user.js
 // ==/UserScript==
