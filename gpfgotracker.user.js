@@ -7,6 +7,7 @@
 // @author   Katai
 // @include  https://gamepress.gg/grandorder*walkthrough*
 // @include  https://fgo.gamepress.gg/*walkthrough*
+// @include  https://grandorder.gamepress.gg/p/*walkthrough*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @updateURL https://github.com/KataiKi/gpfgotracker/raw/main/gpfgotracker.user.js
 // ==/UserScript==
@@ -72,7 +73,7 @@ async function load() {
   wrapper.setAttribute('style',
     `position:fixed;
     top:20px;
-    left:20px;
+    left:320px;
     display:inline-block;
     z-index:100;`
   );
